@@ -9,12 +9,14 @@ variable "sg_names" {
     #databasess
     "mongodb", "redis", "mysql", "rabbitmq",
     #backend
-    "catalogue", "user", "cart", "payment",
+    "catalogue", "user", "cart", "shipping", "payment",
     #frontend
     "frontend",
     #bastion
     "bastion",
     #frontend load balancer
-    "frontend-lb"
+    "frontend_alb",
+    #backend load balancer
+    "backend_alb"
     ]
 }
