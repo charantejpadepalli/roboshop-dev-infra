@@ -4,3 +4,6 @@ variable "project_name" {
 variable "environment" {
   default = "dev"
 }
+variable "domain_name" {
+  default = "devopspractice.shop"
+}
