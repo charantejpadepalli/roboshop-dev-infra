@@ -1,6 +1,6 @@
 #!/bin/bash
-component = $1
-environment = $2
+component=$1
+environment=$2
 dnf install ansible -y
 #ansible-pull -U https://github.com/charantejpadepalli/ansible-roboshop-roles-tf.git -e component=$component main.yaml
 REPO_URL=https://github.com/charantejpadepalli/ansible-roboshop-roles-tf.git
@@ -10,7 +10,7 @@ mkdir -p $REPO_DIR
 mkdir -p /var/log/roboshop/
 touch ansible.log
 cd $REPO_DIR
-if [-d $ANSIBLE_DIR ]; then
+if [ -d $ANSIBLE_DIR ]; then
     cd $ANSIBLE_DIR
     git pull
 else
