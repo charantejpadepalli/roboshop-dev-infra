@@ -1,4 +1,4 @@
-resource "aws_instance" "mongodb" {
+resource "aws_instance" "catalogue" {
   ami           = local.ami_id
   instance_type = "t3.micro"
   vpc_security_group_ids = [local.catalogue_sg_id]   
@@ -6,7 +6,7 @@ resource "aws_instance" "mongodb" {
   tags = merge(
     local.common_tags,
     {
-        Name = "${local.common_name_suffix}-mongodb"
+        Name = "${local.common_name_suffix}-catalogue"
     }
   )
 }
@@ -18,7 +18,7 @@ resource "terraform_data" "catalogue" {
     type = "ssh"
     user = "ec2-user"
     password = "DevOps321"
-    host = aws_instance.mongodb.private_ip
+    host = aws_instance.catalogue.private_ip
   }
   provisioner "file" {
     source = "catalogue.sh"
@@ -43,7 +43,7 @@ resource "aws_ami_from_instance" "catalogue" {
   tags = merge(
     local.common_tags,
     {
-        Name = "${local.common_name_suffix}-mongodb"
+        Name = "${local.common_name_suffix}-catalogue"
     }
   )
 }
@@ -76,7 +76,7 @@ resource "aws_launch_template" "catalogue" {
     tags = merge(
         local.common_tags,
         {
-            Name = "${local.common_name_suffix}-mongodb"
+            Name = "${local.common_name_suffix}-catalogue"
         }
     )
   }
@@ -85,14 +85,14 @@ resource "aws_launch_template" "catalogue" {
     tags = merge(
         local.common_tags,
         {
-            Name = "${local.common_name_suffix}-mongodb"
+            Name = "${local.common_name_suffix}-catalogue"
         }
     )
   }
   tags = merge( #tags attached to launch template
         local.common_tags,
         {
-            Name = "${local.common_name_suffix}-mongodb"
+            Name = "${local.common_name_suffix}-catalogue"
         }
     )
 }
@@ -121,7 +121,7 @@ resource "aws_autoscaling_group" "catalogue" {
     for_each = merge(
         local.common_tags,
         {
-            Name = "${local.common_name_suffix}-mongodb"
+            Name = "${local.common_name_suffix}-catalogue"
         }
     )
     content {
