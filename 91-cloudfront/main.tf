@@ -1,4 +1,4 @@
-resource "aws_cloudfront_distribution" "cloudfront" {
+resource "aws_cloudfront_distribution" "roboshop" {
   origin {
     domain_name = "${var.project_name}-${var.environment}.${var.domain_name}"
     origin_id = "${var.project_name}-${var.environment}.${var.domain_name}"
